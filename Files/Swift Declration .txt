@@ -1,0 +1,18 @@
+var x:Int = 10
+------------------------
+var x:Int = a + b
+-------------------------
+func greet(person: String) -> String {
+ return greeting 
+}
+---------------------------
+class example {
+var x:Int
+}
+-----------------------------
+struct Person {
+}
+-------------------------------
+protocol Greet {
+}
+--------------------------------

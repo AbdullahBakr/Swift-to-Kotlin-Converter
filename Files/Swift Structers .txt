@@ -1,0 +1,128 @@
+struct MainView: View {
+    var body: some View {
+                NavigationView {
+                    ScrollView {
+                        VStack {
+                        NavigationLink(destination: RecipeView(recipes: breakfastRecipes)) {
+                            Text("Breakfast")
+                                .font(.title)
+                        }
+                        Image("breakfast")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 500, height: 200)
+                        
+                        NavigationLink(destination: RecipeView(recipes: lunchRecipes)) {
+                            Text("Lunch")
+                                .font(.title)
+                        }
+                        Image("lunch")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 500, height: 200)
+                        
+                        NavigationLink(destination: RecipeView(recipes: dinnerRecipes)) {
+                            Text("Dinner")
+                                .font(.title)
+                        }
+                        Image("dinner")
+                            .resizable()
+                            .aspectRatio(contentMode    : .fit)
+                            .frame(width: 500, height: 200)
+                    }
+                    .padding()
+                }
+                
+                .navigationBarTitle("Taste Made")
+                .navigationBarTitleDisplayMode(.inline)
+
+            }
+    }
+}
+
+-----------------------------------------------
+struct RecipeView: View {
+    var recipes: [Recipe]
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                ForEach(recipes) { recipe in
+                    NavigationLink(destination: RecipeDetailsView(recipe: recipe)) {
+                        VStack {
+                            Image(recipe.imageName)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 350, height: 200)
+                            Text(recipe.name)
+                                .font(.headline)
+                        }
+                    }
+                }
+            }
+            .padding()
+        }
+    }
+}
+
+---------------------------------------------------------------
+struct RecipeDetailsView: View {
+    var recipe: Recipe
+    
+    var body: some View {
+        VStack {
+            Image(recipe.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxHeight: 200)
+            Text(recipe.name)
+                .font(.title)
+            Text("Ingredients: \(recipe.ingredients)")
+                .font(.subheadline)
+                .padding()
+            Spacer()
+        }
+        .navigationBarTitle(recipe.name)
+    }
+}
+-------------------------------------------------
+
+
+
+struct Recipe: Identifiable {
+    let name: String
+    let ingredients: String
+    let imageName: String
+}
+--------------------------------------------------
+
+var breakfastRecipes: String = [
+    Recipe(name: "Omelette", ingredients: "Eggs, Salt, Pepper, Cheese", imageName: "omelette"),
+    Recipe(name: "Pancakes", ingredients: "Flour, Milk, Eggs, Sugar, Butter", imageName: "pancakes"),
+    Recipe(name: "Avocado Toast", ingredients: "Banana, Spinach, Yogurt, Almond Milk", imageName: "Avocado_Toast"),
+    Recipe(name: "Scrambled Eggs", ingredients: "Eggs, Salt, Pepper, Milk,Butter", imageName: "Scrambled_Eggs"),
+    Recipe(name: "Fruit Parfait", ingredients: "Yogurt, Granola, Mixed Berries, Honey", imageName: "Fruit_Parfait")
+]
+-----------------------------------------------
+var lunchRecipes: String = [
+    Recipe(name: "Chicken Salad", ingredients: "Chicken, Lettuce, Tomatoes, Cucumbers", imageName: "chicken_salad"),
+    Recipe(name: "Caprese Sandwich", ingredients: "Bread, Tomatoes, Mozzarella, Basil, Balsamic Glaze", imageName: "Caprese_Sandwich"),
+    Recipe(name: "Quinoa Salad", ingredients: "Quinoa, Mixed Greens, Cucumber, Cherry Tomatoes, Red Onion, Feta Cheese, Dressing", imageName: "Quinoa_Salad"),
+    Recipe(name: "Veggie Wrap", ingredients: "Tortilla, Hummus, Lettuce, Tomatoes, Cucumber, Avocado", imageName: "Veggie_Wrap"),
+    Recipe(name: "Buddha Bowl", ingredients: "Grains, Mixed Greens, Roasted Vegetables, Avocado, Tofu, Dressing", imageName: "Buddha_Bowl"),
+    Recipe(name: "Tomato Soup", ingredients: "Tomatoes, Onion, Garlic, Vegetable Broth, Cream, Basil, Croutons", imageName: "Tomato_Soup")
+]
+--------------------------------------------
+var dinnerRecipes: String = [
+    Recipe(name: "Spaghetti Bolognese", ingredients: "Spaghetti, Ground Beef, Onion, Garlic, Tomatoes, Tomato Paste, Italian Seasoning, Parmesan Cheese", imageName: "Spaghetti_Bolognese"),
+    Recipe(name: "Grilled Salmon", ingredients: "Salmon Fillet, Lemon, Dill, Salt, Pepper", imageName: "Grilled_Salmon"),
+    Recipe(name: "Mushroom Risotto", ingredients: "Arborio Rice, Mushrooms, Onion, Garlic, Vegetable Broth , Parmesan Cheese", imageName: "Mushroom_Risotto"),
+    Recipe(name: "Stuffed Bell Peppers", ingredients: "Bell Peppers, Rice, Ground Beef, Onion, Garlic, Tomato Sauce, Cheese", imageName: "Stuffed_Bell_Peppers"),
+    Recipe(name: "Teriyaki Chicken", ingredients: "Chicken Thighs, Teriyaki Sauce, Soy Sauce, Honey, Garlic, Ginger, Green Onions", imageName: "Teriyaki_Chicken"),
+    Recipe(name: "Roasted Vegetables", ingredients: "Assorted Vegetables, Olive Oil, Salt, Pepper, Herbs", imageName: "Roasted_Vegetables")
+]
+
+
+
+
+
